@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+//This class responsible for my peer to be discovered
 public class LocalChatPeer {
 
 	private MainGUI mainGUI;
@@ -31,13 +32,15 @@ public class LocalChatPeer {
 	
 	public void initializeLocalPeer() throws IOException {
 
+		//Create room for chating
 		WlanModule wlanModule = new WlanModule("P2P");
 		this.localPeer = new LocalPeer(Arrays.asList(wlanModule), Executors.newSingleThreadExecutor());
 	}
 
 	public void start(String displayName) {
 		this.displayName = displayName;
-		
+
+		//starting peer we start dih feha 7agten onCreate we onRemove
 		this.localPeer.start(
 			peer -> createChatPeer(peer), 
 			peer -> removeChatPeer(peer)
@@ -46,15 +49,17 @@ public class LocalChatPeer {
 	
 	public void createChatPeer(RemotePeer peer) {
 		if (this.chatPeers.get(peer) != null) {
+			//law heya already 3mla connect abl keda
 			System.err.println("We already have a chat peer for this peer!");
 			return;
 		}
-		
+		// by3ml chat roo, we y7ot feha el peer dih
 		ChatRoom chatPeer = new ChatRoom(peer, this.displayName, this.mainGUI);
 		this.chatPeers.put(peer, chatPeer);
 
 	}
 	public void removeChatPeer(RemotePeer peer) {
+		//byshelha mn el room
 		this.mainGUI.removeChatPeer(this.chatPeers.get(peer));
 		this.chatPeers.remove(peer);
 	}

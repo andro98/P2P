@@ -19,7 +19,7 @@ public class ChatRoom {
     /** The full text in the chat room; contains all messages. */
 	private static String chatText = "";
 
-	private WriteGUI writeGUI;
+	private MainGUI writeGUI;
 
     /** The remotePeer object representing the other peer in the chat room (besides the local peer) */
 	private RemotePeer remotePeer;
@@ -68,6 +68,7 @@ public class ChatRoom {
 		}
 	}
 	private void appendChatMessage(String displayName, String message) {
+		String text = displayName+": "+ message+"\n";
 		chatText += displayName+": "+ message+"\n";
 
 		writeGUI.updateChatData(chatText);

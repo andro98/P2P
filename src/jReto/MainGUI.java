@@ -17,11 +17,16 @@ public class MainGUI extends Frame implements WriteGUI {
 
     private ChatRoom selectedPeer;
     private ArrayList<ChatRoom> chatPeers;
+    private static QueueModule queueModule;
+    private static DataStore dataStore;
+
+    public QueueModule getQueueModule(){return  queueModule;}
 
    /*private static FakeDataGenerator fakeDataGenerator;
     private static Network network;*/
 
     private void Init(){
+
         connectBtn = new Button("Connect");
         connectBtn.setBounds(400,50, 100,30);
 
@@ -92,6 +97,7 @@ public class MainGUI extends Frame implements WriteGUI {
         chatPeer.start(this.ChatRoom.getText());
     }
 
+    @Override
     public void removeChatPeer(ChatRoom chatPeer) {
         this.chatPeers.remove(chatPeer);
         this.chatPeerList.removeAll();
